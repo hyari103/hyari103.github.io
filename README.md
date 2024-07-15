@@ -1,5 +1,8 @@
 # My GitHub Pages Sites
 
+## GitHub Profile
+Visit my [GitHub Profile](https://github.com/hyari103)
+
 ## Main
 Visit [Main](https://hyari103.github.io/)
 
@@ -7,7 +10,7 @@ Visit [Main](https://hyari103.github.io/)
 Visit [Recipe Site](https://hyari103.github.io/recipem/)
 
 ## Second Site
-Visit [Second Site](https://hyari103.github.io/second/)
+Visit [Form Site](https://hyari103.github.io/second/)
 
 
 
