@@ -1,0 +1,143 @@
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #f3e5d8;
+  color: #333; /* Dark grey for general text */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #fff;
+  max-width: 600px;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: left;
+}
+
+.recipe-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+h1 {
+  font-family: 'Young Serif', serif;
+  font-size: 24px;
+  margin: 20px 0 10px;
+  color: #333; /* dark grey color for the header */
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333; /* dark grey color for paragraphs */
+}
+
+h2 {
+  font-family: 'Young Serif', serif;
+  font-size: 20px;
+  margin: 20px 0 10px;
+  color: #8b4513;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+.preparation-time {
+  background-color: #fce4ec;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.preparation-time h2 {
+  color: hsl(332, 51%, 32%); /* dark Raspberry */
+  font-family: 'Outfit', sans-serif;
+}
+
+.preparation-time ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.preparation-time li {
+  margin-bottom: 10px;
+  color: #333; /* dark grey color for list items */
+}
+
+.preparation-time ul li::marker {
+  color: hsl(332, 51%, 32%); /* dark Raspberry for bullet points */
+}
+
+.ingredients ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.ingredients li {
+  margin-bottom: 10px;
+  color: #333; /* dark grey color for list items */
+}
+
+.ingredients ul li::marker {
+  color: #8b4513; /* Matching ingredient list bullet color with heading */
+}
+
+.instructions ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.instructions li {
+  margin-bottom: 17px;
+  color: #333; /* Dark grey color for list items */
+}
+
+.instructions ol li::marker {
+  color: #8b4513; /* Matching instructions list number color with heading */
+}
+
+.nutrition p {
+  color: #333; /* Dark grey color for paragraphs */
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  border-bottom: 1px solid #ccc; /* Only horizontal lines */
+  padding: 8px;
+  text-align: left;
+}
+
+.nutrition-table th {
+  background-color: #fafafa;
+  color: #333; /* Dark grey color for table headers */
+}
+
+.nutrition-table td {
+  color: #8b4513; /* Darker color for table data values */
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
