@@ -1,7 +1,7 @@
 # My GitHub Pages Sites
 
 ## Site 1
-Visit [Site 1](https://hyari103.github.io/)
+Visit [Main](https://hyari103.github.io/)
 
 ## Recipe Site
 Visit [Recipe Site](https://hyari103.github.io/recipem/)
