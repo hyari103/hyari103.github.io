@@ -1,6 +1,6 @@
 # My GitHub Pages Sites
 
-## Site 1
+## Main
 Visit [Main](https://hyari103.github.io/)
 
 ## Recipe Site
