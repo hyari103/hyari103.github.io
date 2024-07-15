@@ -1,15 +1,17 @@
 # My GitHub Pages Sites
 
 ## Site 1
-Visit [Main](https://hyari103.github.io/)
+Visit [Site 1](https://hyari103.github.io/)
 
 ## Recipe Site
 Visit [Recipe Site](https://hyari103.github.io/recipem/)
 
-Explore my projects, blogs, and resources across multiple sites.
+## Second Site
+Visit [Second Site](https://hyari103.github.io/second/)
 
-## Contact
 
-For more information, visit the sites.
+
+
+
 
 
