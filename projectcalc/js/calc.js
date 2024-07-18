@@ -40,7 +40,7 @@ function handleSymbol(symbol) {
         case '+':
         case '-':
         case '×':
-            case '&divide;':
+            case '÷':
                 handleMath(symbol);
                 break;
     }
