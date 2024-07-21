@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    background-image: url('../images/back.jpg'); /* Correct path to your local image */
+    background-size: cover; /* Make sure the image covers the entire page */
+    background-position: center; /* Center the background image */
+    margin: 0;
+    padding: 20px;
+}
+
+
+
+h1 {
+    color: #333;
+}
+
+button.add-doggo {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.add-doggo:hover {
+    background-color: #45a049;
+}
+
+.doggos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.doggos img {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.select-breed {
+    margin: 20px;
+    padding: 10px;
+    font-size: 16px;
+}
