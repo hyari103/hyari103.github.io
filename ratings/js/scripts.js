@@ -1,4 +1,3 @@
-// scripts.js
 document.addEventListener('DOMContentLoaded', () => {
     const ratingBtns = document.querySelectorAll('.rating-btn');
     const submitBtn = document.querySelector('.submit-btn');
