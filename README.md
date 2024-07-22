@@ -23,3 +23,6 @@ Visit [Gallery2](https://hyari103.github.io/gallery2/)
 
 ## Doggos
 Visit [Doggos](https://hyari103.github.io/Doggos/)
+
+## Interactive Ratings
+Visit [Ratings](https://hyari103.github.io/ratings/)
