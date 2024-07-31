@@ -139,7 +139,7 @@ form .radio-group input[type="radio"]:checked + label::before {
 
 form .radio-group input[type="radio"]:checked + label {
   background-color: #fafae0;
-  border-color: #ecefa4;
+  border-color: var(--lime);
 }
 
 form .radio-group label:hover {
@@ -230,11 +230,12 @@ form button[type="submit"]:hover {
   color: var(--slate-300);
 }
 
+
 .results-content {
   background-color: #0e2431;
   border-radius: 8px;
   padding: 20px;
-  width: 100%;
+  width: 85%;
   max-width: 400px;
   border-top: 4px solid var(--lime);
 }
