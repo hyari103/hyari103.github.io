@@ -174,7 +174,7 @@ form button[type="button"]#clear-all {
 }
 
 form button[type="submit"]:hover {
-  background-color: var(--blue);
+  background-color: #eaee95;
 }
 
 .results-container {
@@ -202,4 +202,25 @@ form button[type="submit"]:hover {
 .results-container p {
   font-size: 1rem;
   margin: 0;
+}
+
+/* style.css */
+.error {
+  border-color: var(--red);
+}
+
+.error-message {
+  color: var(--red);
+  font-size: 0.875rem;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
+}
+
+.radio-group.error {
+  border-color: var(--red);
+}
+
+.radio-group .error-message {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
