@@ -26,21 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!amount.value) {
       isValid = false;
-      showError(amount, 'This field is required');
+      showError(amount);
     } else {
       clearError(amount);
     }
 
     if (!term.value) {
       isValid = false;
-      showError(term, 'This field is required');
+      showError(term);
     } else {
       clearError(term);
     }
 
     if (!rate.value) {
       isValid = false;
-      showError(rate, 'This field is required');
+      showError(rate);
     } else {
       clearError(rate);
     }
@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return isValid;
   }
 
-  function showError(input, message) {
+  function showError(input) {
     input.classList.add('error');
     let error = input.nextElementSibling;
     if (!error || !error.classList.contains('error-message')) {
       error = document.createElement('div');
       error.className = 'error-message';
+      error.innerText = 'This field is required';
       input.parentNode.appendChild(error);
     }
-    error.innerText = message;
   }
 
   function clearError(input) {
@@ -105,13 +105,27 @@ document.addEventListener('DOMContentLoaded', () => {
       monthlyRepayment = (amount * rate) / 12;
     }
 
-    displayResults(monthlyRepayment);
+    const totalRepayment = monthlyRepayment * term * 12;
+    displayResults(monthlyRepayment, totalRepayment);
   }
 
-  function displayResults(monthlyRepayment) {
+  function displayResults(monthlyRepayment, totalRepayment) {
     resultsContainer.innerHTML = `
-      <h2>Results</h2>
-      <p>Your monthly repayment is: £${monthlyRepayment.toFixed(2)}</p>
+      <div class="results-header">
+        <h2>Your results</h2>
+        <p>Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.</p>
+      </div>
+      <div class="results-content">
+        <div class="monthly-repayment">
+          <p>Your monthly repayments</p>
+          <h3>£${monthlyRepayment.toFixed(2)}</h3>
+        </div>
+        <hr>
+        <div class="total-repayment">
+          <p>Total you'll repay over the term</p>
+          <h3>£${totalRepayment.toFixed(2)}</h3>
+        </div>
+      </div>
     `;
   }
 

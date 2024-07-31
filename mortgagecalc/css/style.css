@@ -204,7 +204,7 @@ form button[type="submit"]:hover {
   margin: 0;
 }
 
-/* style.css */
+/* Error states */
 .error {
   border-color: var(--red);
 }
@@ -216,11 +216,59 @@ form button[type="submit"]:hover {
   margin-bottom: 1rem;
 }
 
-.radio-group.error {
-  border-color: var(--red);
+/* Results styling */
+.results-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
 }
 
-.radio-group .error-message {
-  margin-top: 0;
+.results-header p {
+  font-size: 1rem;
   margin-bottom: 1rem;
+  text-align: left;
+  color: var(--slate-300);
 }
+
+.results-content {
+  background-color: #0e2431;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  border-top: 4px solid var(--lime);
+}
+
+.results-content .monthly-repayment,
+.results-content .total-repayment {
+  text-align: left;
+}
+
+.results-content .monthly-repayment p,
+.results-content .total-repayment p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--slate-300);
+}
+
+.results-content .monthly-repayment h3,
+.results-content .total-repayment h3 {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+  color: var(--lime);
+}
+
+.results-content hr {
+  border: none;
+  border-top: 1px solid var(--slate-500);
+  margin: 1rem 0;
+}
+.results-content .monthly-repayment h3 {
+font-size: 3rem;
+}
+
+.results-content .total-repayment h3 {
+  color: white;
+  font-size: 1.3rem;
+}
+
