@@ -26,3 +26,9 @@ Visit [Doggos](https://hyari103.github.io/Doggos/)
 
 ## Interactive Ratings
 Visit [Ratings](https://hyari103.github.io/ratings/)
+
+## Mole Game 
+Visit [Mole game](https://hyari103.github.io/molegame/)
+
+## Mortgage Repayment
+Visit [Mortgage Repayment](https://hyari103.github.io/mortgagecalc/)
