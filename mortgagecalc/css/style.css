@@ -131,6 +131,7 @@ form .radio-group label::before {
   box-sizing: border-box;
 }
 
+
 /* Style for the checked state */
 form .radio-group input[type="radio"]:checked + label::before {
   background-color: var(--lime);
@@ -149,17 +150,20 @@ form .radio-group label:hover {
 form button[type="button"],
 form button[type="submit"] {
   background-color: var(--lime);
-  color: black;
-  padding: 10px;
+  color: var(--slate-900);
+  padding: 15px 40px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   cursor: pointer;
   width: 75%;
   font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 10px;
+}
+form button[type="submit"]{
+  font-weight: bold;
 }
 
 form button[type="button"]#clear-all {
@@ -187,6 +191,7 @@ form button[type="submit"]:hover {
   padding: 20px;
   flex: 1;
   text-align: center;
+  border-bottom-left-radius: 75px;
 }
 
 .results-container img {
@@ -271,5 +276,10 @@ font-size: 3rem;
 .results-content .total-repayment h3 {
   color: white;
   font-size: 1.3rem;
+}
+
+input[type="number"]:focus {
+  border-color: var(--lime);
+  outline: none;
 }
 
