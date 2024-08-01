@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('mortgage-form');
   const resultsContainer = document.getElementById('results');
@@ -6,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (validateForm()) {
+    const isValid = validateForm();
+    if (isValid) {
       calculateRepayments();
     }
   });
@@ -47,17 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!form.querySelector('input[name="type"]:checked')) {
       isValid = false;
-      radioGroup.classList.add('error');
-      if (!radioGroup.querySelector('.error-message')) {
-        const error = document.createElement('div');
-        error.className = 'error-message';
-        error.innerText = 'This field is required';
-        radioGroup.appendChild(error);
-      }
+      showError(radioGroup);
     } else {
-      radioGroup.classList.remove('error');
-      const error = radioGroup.querySelector('.error-message');
-      if (error) error.remove();
+      clearError(radioGroup);
     }
 
     return isValid;
@@ -65,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showError(input) {
     input.classList.add('error');
-    let error = input.nextElementSibling;
-    if (!error || !error.classList.contains('error-message')) {
+    let error = input.parentNode.querySelector('.error-message');
+    if (!error) {
       error = document.createElement('div');
       error.className = 'error-message';
       error.innerText = 'This field is required';
@@ -76,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function clearError(input) {
     input.classList.remove('error');
-    const error = input.nextElementSibling;
-    if (error && error.classList.contains('error-message')) {
+    const error = input.parentNode.querySelector('.error-message');
+    if (error) {
       error.remove();
     }
   }
