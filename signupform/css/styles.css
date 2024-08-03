@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: hsl(0, 100%, 74%);
+    background-image: url('../images/bg-intro-desktop.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1440px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.intro {
+    color: white;
+    padding: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.intro h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.intro p {
+    font-size: 1rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.trial-info {
+    background-color: hsl(248, 32%, 49%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Adjust shadow effect */
+}
+
+.sign-up-form {
+    padding: 60px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Adjust shadow effect */
+    max-width: 650px;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid hsl(246, 25%, 77%);
+    border-radius: 5px;
+    font-size: 1rem;
+    position: relative;
+}
+
+input.error {
+    border-color: hsl(0, 100%, 74%);
+    background-image: url('../images/icon-error.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+input::placeholder {
+    color: #78787a;
+    font-weight: bold;
+}
+
+button {
+    background-color: hsl(154, 59%, 51%);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #77e2b4;
+}
+
+.terms {
+    text-align: center;
+    font-size: 0.75rem;
+    color: hsl(246, 25%, 77%);
+    margin-top: 10px;
+}
+
+.terms a {
+    color: hsl(0, 100%, 74%);
+    font-weight: bold;
+}
+
+.error-message {
+    color: hsl(0, 100%, 74%);
+    font-size: 0.75rem;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    text-align: right;
+    right: 15px;
+    padding-top: 5px;
+    font-style: italic;
+}
