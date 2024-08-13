@@ -174,4 +174,7 @@ document.getElementById('start-button').addEventListener('click', startQuiz);
 document.getElementById('restart-button').addEventListener('click', () => {
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
+
+        // Reset the button text to "Next Question" when restarting
+        document.getElementById('next-button').textContent = 'Next Question';
 });
