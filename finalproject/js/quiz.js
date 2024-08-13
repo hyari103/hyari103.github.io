@@ -6,7 +6,7 @@ let timeRemaining = 600; // 10 minutes
 
 // Fetch questions from the API
 async function fetchQuestions() {
-    const response = await fetch('https://opentdb.com/api.php?amount=20&category=9&difficulty=easy');
+    const response = await fetch('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy');
     const data = await response.json();
     
     return data.results.map(question => ({
