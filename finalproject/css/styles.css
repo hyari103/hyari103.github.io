@@ -165,3 +165,27 @@ select, input[type="text"] {
 #result-message {
     font-size: 20px;
 }
+
+/* Progress Bar */
+#progress-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.progress-dot {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.progress-dot.active {
+    background-color: #1982c4; /* Active dot color */
+}
+
+.progress-dot.answered {
+    background-color: #fbcb04; /* Answered dot color */
+}

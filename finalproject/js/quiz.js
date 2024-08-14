@@ -54,7 +54,47 @@ function customizeQuestions(questions) {
     });
 }
 
+// Initialize the progress bar
+function initializeProgressBar(totalQuestions) {
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.innerHTML = '';
+    for (let i = 0; i < totalQuestions; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('progress-dot');
+        if (i === 0) dot.classList.add('active');
+        progressBar.appendChild(dot);
+    }
+}
 
+// Update the progress bar as you move through questions
+function updateProgressBar() {
+    const dots = document.querySelectorAll('.progress-dot');
+    dots.forEach((dot, index) => {
+        dot.classList.remove('active', 'answered');
+        if (index < currentQuestionIndex) {
+            dot.classList.add('answered');
+        } else if (index === currentQuestionIndex) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+
+// Start the quiz by displaying the first question and initializing the timer
+function startQuiz() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('quiz-page').style.display = 'flex';
+    currentQuestionIndex = 0;
+    score = 0;
+    timeRemaining = 600; // 10 minutes
+    startTimer();
+
+    fetchQuestions().then(fetchedQuestions => {
+        questions = customizeQuestions(fetchedQuestions);
+        initializeProgressBar(questions.length); // Initialize the progress bar
+        showQuestion(questions[currentQuestionIndex]);
+    });
+}
 
 // Display the current question on the page
 function showQuestion(question) {
@@ -75,6 +115,15 @@ function showQuestion(question) {
     } else if (question.type === 'dropdown') {
         const selectElement = document.createElement('select');
         selectElement.id = 'answer';
+        
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = "";
+        placeholderOption.textContent = "Select an answer";
+        placeholderOption.selected = true;
+        placeholderOption.disabled = true;
+        selectElement.appendChild(placeholderOption);
+        
         question.options.forEach(option => {
             const optionElement = document.createElement('option');
             optionElement.value = option;
@@ -88,7 +137,22 @@ function showQuestion(question) {
         inputElement.id = 'answer';
         questionContainer.appendChild(inputElement);
     }
+
+    updateProgressBar(); // Update progress bar when showing a new question
 }
+
+// Validate the current answer before moving to the next question
+function validateAnswer(question) {
+    if (question.type === 'multiple-choice' || question.type === 'dropdown') {
+        const selectedOption = document.querySelector('input[name="answer"]:checked') || document.getElementById('answer');
+        return selectedOption && selectedOption.value !== '';
+    } else if (question.type === 'fill-in-the-blank') {
+        const inputElement = document.getElementById('answer');
+        return inputElement && inputElement.value.trim() !== '';
+    }
+    return false;
+}
+
 
 // Check the user's answer and update the score
 function checkAnswer(question) {
@@ -104,21 +168,6 @@ function checkAnswer(question) {
             score++;
         }
     }
-}
-
-// Start the quiz by displaying the first question and initializing the timer
-function startQuiz() {
-    document.getElementById('homepage').style.display = 'none';
-    document.getElementById('quiz-page').style.display = 'flex';
-    currentQuestionIndex = 0;
-    score = 0;
-    timeRemaining = 600; // 10 minutes
-    startTimer();
-
-    fetchQuestions().then(fetchedQuestions => {
-        questions = customizeQuestions(fetchedQuestions);
-        showQuestion(questions[currentQuestionIndex]);
-    });
 }
 
 // Start the timer for the quiz
@@ -165,18 +214,20 @@ const brainImage = document.createElement('img');
 brainImage.src = 'images/quiz.png';
 document.getElementById('homepage').prepend(brainImage);
 
-
 // Event listener to handle the Next button click
 document.getElementById('next-button').addEventListener('click', () => {
-    checkAnswer(questions[currentQuestionIndex]);
+    const currentQuestion = questions[currentQuestionIndex];
+
+    if (!validateAnswer(currentQuestion)) {
+        alert('Please select an answer before proceeding.');
+        return; // Do not proceed if the answer is not validated
+    }
+
+    checkAnswer(currentQuestion);
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length - 1) {
-        document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+    if (currentQuestionIndex < questions.length) {
         showQuestion(questions[currentQuestionIndex]);
-    } else if (currentQuestionIndex === questions.length - 1) {
-        document.getElementById('next-button').textContent = 'Finish Quiz';
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
-        showQuestion(questions[currentQuestionIndex]);
     } else {
         finishQuiz();
     }
@@ -200,4 +251,3 @@ document.getElementById('restart-button').addEventListener('click', () => {
     // Set the first question title correctly
     document.getElementById('question-title').textContent = `Question 1`;
 });
-
