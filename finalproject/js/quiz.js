@@ -135,7 +135,7 @@ function startTimer() {
     }, 1000);
 }
 
-// Handle the end of the quiz, displaying the score and results
+// Function to handle the end of the quiz
 function finishQuiz() {
     clearInterval(timerInterval);
     document.getElementById('quiz-page').style.display = 'none';
@@ -143,14 +143,28 @@ function finishQuiz() {
     document.getElementById('score').textContent = score;
     document.getElementById('total-questions').textContent = questions.length;
 
+    const resultTitle = document.getElementById('result-title');
+    const resultMessage = document.getElementById('result-message');
+    const resultImage = document.createElement('img'); // Create an image element
+
     if (score / questions.length >= 0.5) {
-        document.getElementById('result-title').textContent = 'Congratulations!';
-        document.getElementById('result-message').textContent = 'Great job! You scored ' + score + ' out of ' + questions.length;
+        resultTitle.textContent = 'Congratulations!';
+        resultMessage.textContent = 'Great job! You scored ' + score + ' out of ' + questions.length;
+        resultImage.src = 'images/congratulation.png'; // Use the congratulation image
     } else {
-        document.getElementById('result-title').textContent = 'Better Luck Next Time!';
-        document.getElementById('result-message').textContent = 'You scored ' + score + ' out of ' + questions.length;
+        resultTitle.textContent = 'Better Luck Next Time!';
+        resultMessage.textContent = 'You scored ' + score + ' out of ' + questions.length;
+        resultImage.src = 'images/achieve.png'; // Use the achieve image
     }
+
+    document.getElementById('finish-page').appendChild(resultImage); // Append the image to the finish page
 }
+
+// Add the brain image to the homepage
+const brainImage = document.createElement('img');
+brainImage.src = 'images/quiz.png';
+document.getElementById('homepage').prepend(brainImage);
+
 
 // Event listener to handle the Next button click
 document.getElementById('next-button').addEventListener('click', () => {
@@ -176,6 +190,14 @@ document.getElementById('restart-button').addEventListener('click', () => {
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
 
-        // Reset the button text to "Next Question" when restarting
-        document.getElementById('next-button').textContent = 'Next Question';
+    // Reset the question index and score when restarting
+    currentQuestionIndex = 0;
+    score = 0;
+
+    // Reset the button text to "Next Question" when restarting
+    document.getElementById('next-button').textContent = 'Next Question';
+    
+    // Set the first question title correctly
+    document.getElementById('question-title').textContent = `Question 1`;
 });
+
