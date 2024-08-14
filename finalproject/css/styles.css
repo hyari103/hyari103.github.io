@@ -142,8 +142,9 @@ input[type="radio"]:checked + label {
 }
 
 input[type="radio"] + label:hover {
-    background-color: #3d405b;
+    background-color: #fbcb04;
     transform: scale(1.05);
+    color: #1e1f26;
 }
 
 select, input[type="text"] {
