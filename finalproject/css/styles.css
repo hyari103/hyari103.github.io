@@ -40,6 +40,13 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden; /* Ensure no scrolling */
+
+      /* Background Image */
+      background-image: url('../images/bg-intro-desktop.png'); /* Path to your image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #1e1f26;
 }
 
 .page {
@@ -48,7 +55,7 @@ body {
     height: 90vh;
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    background: #2c2e3b;
+    background: rgba(44, 46, 59, 0.85); /* Adjust background color with opacity for transparency */
     border-radius: 12px;
     text-align: center;
     display: flex;
