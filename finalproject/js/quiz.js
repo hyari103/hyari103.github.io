@@ -79,6 +79,17 @@ function updateProgressBar() {
     });
 }
 
+// Validate the current answer before moving to the next question
+function validateAnswer(question) {
+    if (question.type === 'multiple-choice' || question.type === 'dropdown') {
+        const selectedOption = document.querySelector('input[name="answer"]:checked') || document.getElementById('answer');
+        return selectedOption && selectedOption.value !== '';
+    } else if (question.type === 'fill-in-the-blank') {
+        const inputElement = document.getElementById('answer');
+        return inputElement && inputElement.value.trim() !== '';
+    }
+    return false;
+}
 
 // Start the quiz by displaying the first question and initializing the timer
 function startQuiz() {
@@ -140,19 +151,6 @@ function showQuestion(question) {
 
     updateProgressBar(); // Update progress bar when showing a new question
 }
-
-// Validate the current answer before moving to the next question
-function validateAnswer(question) {
-    if (question.type === 'multiple-choice' || question.type === 'dropdown') {
-        const selectedOption = document.querySelector('input[name="answer"]:checked') || document.getElementById('answer');
-        return selectedOption && selectedOption.value !== '';
-    } else if (question.type === 'fill-in-the-blank') {
-        const inputElement = document.getElementById('answer');
-        return inputElement && inputElement.value.trim() !== '';
-    }
-    return false;
-}
-
 
 // Check the user's answer and update the score
 function checkAnswer(question) {
@@ -225,9 +223,14 @@ document.getElementById('next-button').addEventListener('click', () => {
 
     checkAnswer(currentQuestion);
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion(questions[currentQuestionIndex]);
+
+    if (currentQuestionIndex < questions.length - 1) {
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+        showQuestion(questions[currentQuestionIndex]);
+    } else if (currentQuestionIndex === questions.length - 1) {
+        document.getElementById('next-button').textContent = 'Finish Quiz';
+        document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+        showQuestion(questions[currentQuestionIndex]);
     } else {
         finishQuiz();
     }
