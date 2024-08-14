@@ -27,19 +27,19 @@ function decodeHTMLEntities(text) {
 // Customize the questions to introduce variety (dropdown and fill-in-the-blank)
 function customizeQuestions(questions) {
     return questions.map((question, index) => {
-        // Determine if the question is a good candidate for fill-in-the-blank
-        const isSingleWordAnswer = question.answer.split(' ').length === 1;
-        const hasFewOptions = question.options.length <= 3;
+        const isTrueFalse = question.options.length === 2 && 
+                            question.options.includes("True") && 
+                            question.options.includes("False");
 
-        if (isSingleWordAnswer && hasFewOptions) {
-            // Use fill-in-the-blank only if the answer is a single word and there are few options
+        // Limit fill-in-the-blank to true/false questions only
+        if (isTrueFalse) {
             return {
                 ...question,
                 type: 'fill-in-the-blank',
                 question: question.question.replace(question.answer, '_____')
             };
         } else if (index % 2 === 0) {
-            // Alternate between dropdown and multiple-choice to mix up the question types
+            // Alternate between dropdown and multiple-choice for other questions
             return {
                 ...question,
                 type: 'dropdown'
@@ -53,6 +53,7 @@ function customizeQuestions(questions) {
         }
     });
 }
+
 
 
 // Display the current question on the page
