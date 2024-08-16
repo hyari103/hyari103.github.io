@@ -1,23 +1,23 @@
-/* Updated styles.css with grid layout and modern color palette */
+/* Updated styles.css with enhanced hover effects */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #f857a6, #ff5858); /* Vibrant gradient background */
+    background: linear-gradient(to right, #232526, #414345); /* Dark gradient background */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #333;
+    color: #e0e0e0; /* Light grey text color */
 }
 
 .container {
-    background: #f0f0f0; /* Light grey background for the container */
+    background: #2c2c2c; /* Dark grey background for the container */
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     max-width: 800px;
     width: 100%;
     text-align: center;
@@ -26,7 +26,7 @@ body {
 h1 {
     margin-bottom: 30px;
     font-size: 2.5em;
-    color: #333;
+    color: #f5f5f5; /* Off-white color for the heading */
 }
 
 .grid {
@@ -37,24 +37,27 @@ h1 {
 
 .grid-item {
     padding: 15px;
-    background-color: #ffffff; /* White background for grid items */
+    background-color: #000046; /* Dark purple background */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer; /* Makes the entire grid item clickable */
 }
 
 .grid-item:hover {
     transform: translateY(-5px);
-    background-color: #ff7e5f; /* Subtle hover effect with color change */
+    background-color: #5d009a; /* Lighter purple on hover */
+    color: #ff9800; /* Orange text color on hover */
 }
 
-a {
+.grid-item a {
     text-decoration: none;
-    color: #555; /* Darker color for text */
-    font-weight: 700;
+    color: inherit; /* Inherit color from grid-item */
+    display: block; /* Makes the entire grid item clickable */
+    height: 100%; /* Ensures the link covers the entire grid item */
+    width: 100%;
 }
 
-a:hover {
-    color: #ffffff; /* Text changes to white on hover */
+.grid-item a:hover {
+    color: inherit; /* Keeps text color on hover */
 }
-
