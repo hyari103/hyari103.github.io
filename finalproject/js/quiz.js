@@ -238,9 +238,14 @@ document.getElementById('next-button').addEventListener('click', () => {
     if (currentQuestionIndex < questions.length - 1) {
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
         showQuestion(questions[currentQuestionIndex]);
-    } else {
-        document.getElementById('next-button').style.display = 'none'; // Hide Next button
-        document.getElementById('finish-button').style.display = 'inline-block'; // Show Finish button
+    } else if (currentQuestionIndex === questions.length - 1) {
+        // Display the last question (Question 10)
+        document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+        showQuestion(questions[currentQuestionIndex]);
+
+        // Hide Next button and show Finish button
+        document.getElementById('next-button').style.display = 'none';
+        document.getElementById('finish-button').style.display = 'inline-block';
     }
 });
 
@@ -257,6 +262,10 @@ document.getElementById('restart-button').addEventListener('click', () => {
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
 
+        // Clear the question container to avoid showing the last question briefly
+        const questionContainer = document.getElementById('question-container');
+        questionContainer.innerHTML = '';
+    
     currentQuestionIndex = 0;
     score = 0;
 
