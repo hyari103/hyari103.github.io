@@ -105,6 +105,8 @@ function startQuiz() {
         initializeProgressBar(questions.length); // Initialize the progress bar
         showQuestion(questions[currentQuestionIndex]);
     });
+
+    document.addEventListener('keypress', handleEnterKey); // Add keypress listener
 }
 
 // Display the current question on the page
@@ -205,6 +207,34 @@ function finishQuiz() {
     }
 
     document.getElementById('finish-page').appendChild(resultImage); // Append the image to the finish page
+
+    document.removeEventListener('keypress', handleEnterKey); // Remove keypress listener
+}
+
+// Function to handle the Enter key press
+function handleEnterKey(event) {
+    if (event.key === "Enter") {
+        const currentQuestion = questions[currentQuestionIndex];
+
+        if (!validateAnswer(currentQuestion)) {
+            alert('Please select an answer before proceeding.');
+            return; // Do not proceed if the answer is not validated
+        }
+
+        checkAnswer(currentQuestion);
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length - 1) {
+            document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+            showQuestion(questions[currentQuestionIndex]);
+        } else if (currentQuestionIndex === questions.length - 1) {
+            document.getElementById('next-button').textContent = 'Finish Quiz';
+            document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+            showQuestion(questions[currentQuestionIndex]);
+        } else {
+            finishQuiz();
+        }
+    }
 }
 
 // Add the brain image to the homepage
@@ -250,7 +280,9 @@ document.getElementById('restart-button').addEventListener('click', () => {
 
     // Reset the button text to "Next Question" when restarting
     document.getElementById('next-button').textContent = 'Next Question';
-    
+
     // Set the first question title correctly
     document.getElementById('question-title').textContent = `Question 1`;
+
+    document.addEventListener('keypress', handleEnterKey); // Add keypress listener
 });
