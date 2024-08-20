@@ -52,14 +52,18 @@ h1 {
 }
 
 .grid-item a {
-    display: block; /* Make the anchor tag block-level */
-    height: 100%; /* Cover the full height of the grid item */
-    width: 100%; /* Cover the full width of the grid item */
-    padding: 15px; /* Add padding to create space inside the link */
-    text-decoration: none; /* Remove the underline */
-    color: inherit; /* Inherit color from the grid item */
-    border-radius: inherit; /* Apply the same border-radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 15px; /* Keep the padding */
+    text-decoration: none;
+    color: inherit;
+    border-radius: inherit;
+    box-sizing: border-box; /* Ensure padding does not affect dimensions */
 }
+
 
 .grid-item a:hover {
     color: inherit; /* Keeps text color on hover */
