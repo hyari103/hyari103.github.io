@@ -189,3 +189,13 @@ select, input[type="text"] {
 .progress-dot.answered {
     background-color: #fbcb04; /* Answered dot color */
 }
+
+#restart-button {
+    margin-bottom: 20px;
+}
+
+#finish-page img {
+    max-width: 40%; /* Reduced from 50% to 40% */
+    height: auto;
+    margin-bottom: 40px;
+}
