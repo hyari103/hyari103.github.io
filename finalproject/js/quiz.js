@@ -31,7 +31,6 @@ function customizeQuestions(questions) {
                             question.options.includes("True") && 
                             question.options.includes("False");
 
-        // Limit fill-in-the-blank to true/false questions only
         if (isTrueFalse) {
             return {
                 ...question,
@@ -39,13 +38,11 @@ function customizeQuestions(questions) {
                 question: question.question.replace(question.answer, '_____')
             };
         } else if (index % 2 === 0) {
-            // Alternate between dropdown and multiple-choice for other questions
             return {
                 ...question,
                 type: 'dropdown'
             };
         } else {
-            // Default to multiple-choice for the other half of the questions
             return {
                 ...question,
                 type: 'multiple-choice'
@@ -129,7 +126,6 @@ function showQuestion(question) {
         const selectElement = document.createElement('select');
         selectElement.id = 'answer';
         
-        // Add a placeholder option
         const placeholderOption = document.createElement('option');
         placeholderOption.value = "";
         placeholderOption.textContent = "Select an answer";
@@ -194,45 +190,30 @@ function finishQuiz() {
 
     const resultTitle = document.getElementById('result-title');
     const resultMessage = document.getElementById('result-message');
-    const resultImage = document.createElement('img'); // Create an image element
+    const resultImage = document.createElement('img'); 
 
     if (score / questions.length >= 0.5) {
         resultTitle.textContent = 'Congratulations!';
         resultMessage.textContent = 'Great job! You scored ' + score + ' out of ' + questions.length;
-        resultImage.src = 'images/congratulation.png'; // Use the congratulation image
+        resultImage.src = 'images/congratulation.png'; 
     } else {
         resultTitle.textContent = 'Better Luck Next Time!';
         resultMessage.textContent = 'You scored ' + score + ' out of ' + questions.length;
-        resultImage.src = 'images/achieve.png'; // Use the achieve image
+        resultImage.src = 'images/achieve.png'; 
     }
 
-    document.getElementById('finish-page').appendChild(resultImage); // Append the image to the finish page
+    document.getElementById('finish-page').appendChild(resultImage);
 
-    document.removeEventListener('keypress', handleEnterKey); // Remove keypress listener
+    document.removeEventListener('keypress', handleEnterKey);
 }
 
 // Function to handle the Enter key press
 function handleEnterKey(event) {
     if (event.key === "Enter") {
-        const currentQuestion = questions[currentQuestionIndex];
-
-        if (!validateAnswer(currentQuestion)) {
-            alert('Please select an answer before proceeding.');
-            return; // Do not proceed if the answer is not validated
-        }
-
-        checkAnswer(currentQuestion);
-        currentQuestionIndex++;
-
         if (currentQuestionIndex < questions.length - 1) {
-            document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
-            showQuestion(questions[currentQuestionIndex]);
-        } else if (currentQuestionIndex === questions.length - 1) {
-            document.getElementById('next-button').textContent = 'Finish Quiz';
-            document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
-            showQuestion(questions[currentQuestionIndex]);
+            document.getElementById('next-button').click(); // Simulate Next button click
         } else {
-            finishQuiz();
+            document.getElementById('finish-button').click(); // Simulate Finish button click
         }
     }
 }
@@ -248,7 +229,7 @@ document.getElementById('next-button').addEventListener('click', () => {
 
     if (!validateAnswer(currentQuestion)) {
         alert('Please select an answer before proceeding.');
-        return; // Do not proceed if the answer is not validated
+        return;
     }
 
     checkAnswer(currentQuestion);
@@ -257,13 +238,15 @@ document.getElementById('next-button').addEventListener('click', () => {
     if (currentQuestionIndex < questions.length - 1) {
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
         showQuestion(questions[currentQuestionIndex]);
-    } else if (currentQuestionIndex === questions.length - 1) {
-        document.getElementById('next-button').textContent = 'Finish Quiz';
-        document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
-        showQuestion(questions[currentQuestionIndex]);
     } else {
-        finishQuiz();
+        document.getElementById('next-button').style.display = 'none'; // Hide Next button
+        document.getElementById('finish-button').style.display = 'inline-block'; // Show Finish button
     }
+});
+
+// Event listener to handle the Finish button click
+document.getElementById('finish-button').addEventListener('click', () => {
+    finishQuiz();
 });
 
 // Event listener to handle the Start Quiz button click
@@ -274,15 +257,14 @@ document.getElementById('restart-button').addEventListener('click', () => {
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
 
-    // Reset the question index and score when restarting
     currentQuestionIndex = 0;
     score = 0;
 
-    // Reset the button text to "Next Question" when restarting
-    document.getElementById('next-button').textContent = 'Next Question';
+    document.getElementById('next-button').textContent = 'Next';
+    document.getElementById('next-button').style.display = 'inline-block'; // Show Next button
+    document.getElementById('finish-button').style.display = 'none'; // Hide Finish button
 
-    // Set the first question title correctly
     document.getElementById('question-title').textContent = `Question 1`;
 
-    document.addEventListener('keypress', handleEnterKey); // Add keypress listener
+    document.addEventListener('keypress', handleEnterKey);
 });
