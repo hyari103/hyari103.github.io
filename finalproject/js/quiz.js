@@ -126,22 +126,21 @@ function startQuiz() {
     const stateLoaded = loadQuizState();
 
     if (stateLoaded) {
+        // Hide homepage first if the state is loaded
         document.getElementById('homepage').style.display = 'none';
         document.getElementById('quiz-page').style.display = 'flex';
         startTimer();
         initializeProgressBar(questions.length);
         showQuestion(questions[currentQuestionIndex]);
     } else {
-        document.getElementById('homepage').style.display = 'none';
-        document.getElementById('quiz-page').style.display = 'flex';
-        currentQuestionIndex = 0;
-        score = 0;
-        timeRemaining = 600; // 10 minutes
-        startTimer();
+        // Show the quiz page after loading questions for the first time
         fetchQuestions().then(fetchedQuestions => {
             questions = customizeQuestions(fetchedQuestions);
             initializeProgressBar(questions.length);
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'flex';
             showQuestion(questions[currentQuestionIndex]);
+            startTimer();
             saveQuizState(); // Save the state immediately after loading the questions
         });
     }
