@@ -125,10 +125,11 @@ function clearQuizState() {
 function startQuiz() {
     const stateLoaded = loadQuizState();
 
+    // Immediately hide the homepage and show the quiz page
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('quiz-page').style.display = 'flex';
+
     if (stateLoaded) {
-        // Hide homepage first if the state is loaded
-        document.getElementById('homepage').style.display = 'none';
-        document.getElementById('quiz-page').style.display = 'flex';
         startTimer();
         initializeProgressBar(questions.length);
         showQuestion(questions[currentQuestionIndex]);
@@ -137,8 +138,6 @@ function startQuiz() {
         fetchQuestions().then(fetchedQuestions => {
             questions = customizeQuestions(fetchedQuestions);
             initializeProgressBar(questions.length);
-            document.getElementById('homepage').style.display = 'none';
-            document.getElementById('quiz-page').style.display = 'flex';
             showQuestion(questions[currentQuestionIndex]);
             startTimer();
             saveQuizState(); // Save the state immediately after loading the questions
