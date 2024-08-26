@@ -88,22 +88,65 @@ function validateAnswer(question) {
     return false;
 }
 
+// Save the quiz state to local storage
+function saveQuizState() {
+    localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+    localStorage.setItem('score', score);
+    localStorage.setItem('timeRemaining', timeRemaining);
+    localStorage.setItem('questions', JSON.stringify(questions)); // Save the questions themselves
+}
+
+// Load the quiz state from local storage
+function loadQuizState() {
+    const savedQuestionIndex = localStorage.getItem('currentQuestionIndex');
+    const savedScore = localStorage.getItem('score');
+    const savedTimeRemaining = localStorage.getItem('timeRemaining');
+    const savedQuestions = localStorage.getItem('questions');
+
+    if (savedQuestionIndex !== null && savedScore !== null && savedTimeRemaining !== null && savedQuestions !== null) {
+        currentQuestionIndex = parseInt(savedQuestionIndex);
+        score = parseInt(savedScore);
+        timeRemaining = parseInt(savedTimeRemaining);
+        questions = JSON.parse(savedQuestions);
+        return true; // Return true if a saved state is loaded
+    }
+    return false; // Return false if no saved state exists
+}
+
+// Clear the quiz state from local storage
+function clearQuizState() {
+    localStorage.removeItem('currentQuestionIndex');
+    localStorage.removeItem('score');
+    localStorage.removeItem('timeRemaining');
+    localStorage.removeItem('questions');
+}
+
 // Start the quiz by displaying the first question and initializing the timer
 function startQuiz() {
-    document.getElementById('homepage').style.display = 'none';
-    document.getElementById('quiz-page').style.display = 'flex';
-    currentQuestionIndex = 0;
-    score = 0;
-    timeRemaining = 600; // 10 minutes
-    startTimer();
+    const stateLoaded = loadQuizState();
 
-    fetchQuestions().then(fetchedQuestions => {
-        questions = customizeQuestions(fetchedQuestions);
-        initializeProgressBar(questions.length); // Initialize the progress bar
+    if (stateLoaded) {
+        document.getElementById('homepage').style.display = 'none';
+        document.getElementById('quiz-page').style.display = 'flex';
+        startTimer();
+        initializeProgressBar(questions.length);
         showQuestion(questions[currentQuestionIndex]);
-    });
+    } else {
+        document.getElementById('homepage').style.display = 'none';
+        document.getElementById('quiz-page').style.display = 'flex';
+        currentQuestionIndex = 0;
+        score = 0;
+        timeRemaining = 600; // 10 minutes
+        startTimer();
+        fetchQuestions().then(fetchedQuestions => {
+            questions = customizeQuestions(fetchedQuestions);
+            initializeProgressBar(questions.length);
+            showQuestion(questions[currentQuestionIndex]);
+            saveQuizState(); // Save the state immediately after loading the questions
+        });
+    }
 
-    document.addEventListener('keypress', handleEnterKey); // Add keypress listener
+    document.addEventListener('keypress', handleEnterKey);
 }
 
 // Display the current question on the page
@@ -147,6 +190,12 @@ function showQuestion(question) {
         questionContainer.appendChild(inputElement);
     }
 
+    // Update the question title to show the correct question number
+    document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
+
+    // Update the button visibility
+    updateButtonsVisibility();
+
     updateProgressBar(); // Update progress bar when showing a new question
 }
 
@@ -164,12 +213,14 @@ function checkAnswer(question) {
             score++;
         }
     }
+    saveQuizState(); // Save the state after each answer
 }
 
 // Start the timer for the quiz
 function startTimer() {
     timerInterval = setInterval(() => {
         timeRemaining--;
+        saveQuizState(); // Save the timer state every second
         const minutes = Math.floor(timeRemaining / 60);
         const seconds = timeRemaining % 60;
         document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -187,6 +238,8 @@ function finishQuiz() {
     document.getElementById('finish-page').style.display = 'flex';
     document.getElementById('score').textContent = score;
     document.getElementById('total-questions').textContent = questions.length;
+
+    clearQuizState(); // Clear the state when the quiz finishes
 
     const resultTitle = document.getElementById('result-title');
     const resultMessage = document.getElementById('result-message');
@@ -218,6 +271,17 @@ function handleEnterKey(event) {
     }
 }
 
+// Update the visibility of the Next and Finish buttons
+function updateButtonsVisibility() {
+    if (currentQuestionIndex === questions.length - 1) {
+        document.getElementById('next-button').style.display = 'none';
+        document.getElementById('finish-button').style.display = 'inline-block';
+    } else {
+        document.getElementById('next-button').style.display = 'inline-block';
+        document.getElementById('finish-button').style.display = 'none';
+    }
+}
+
 // Add the brain image to the homepage
 const brainImage = document.createElement('img');
 brainImage.src = 'images/quiz.png';
@@ -239,13 +303,9 @@ document.getElementById('next-button').addEventListener('click', () => {
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
         showQuestion(questions[currentQuestionIndex]);
     } else if (currentQuestionIndex === questions.length - 1) {
-        // Display the last question (Question 10)
+        // Display the last question
         document.getElementById('question-title').textContent = `Question ${currentQuestionIndex + 1}`;
         showQuestion(questions[currentQuestionIndex]);
-
-        // Hide Next button and show Finish button
-        document.getElementById('next-button').style.display = 'none';
-        document.getElementById('finish-button').style.display = 'inline-block';
     }
 });
 
@@ -259,12 +319,13 @@ document.getElementById('start-button').addEventListener('click', startQuiz);
 
 // Event listener to handle the Restart Quiz button click
 document.getElementById('restart-button').addEventListener('click', () => {
+    clearQuizState(); // Clear the state when restarting
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
 
-        // Clear the question container to avoid showing the last question briefly
-        const questionContainer = document.getElementById('question-container');
-        questionContainer.innerHTML = '';
+    // Clear the question container to avoid showing the last question briefly
+    const questionContainer = document.getElementById('question-container');
+    questionContainer.innerHTML = '';
     
     currentQuestionIndex = 0;
     score = 0;
