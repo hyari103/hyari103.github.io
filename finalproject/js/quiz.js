@@ -121,6 +121,31 @@ function clearQuizState() {
     localStorage.removeItem('questions');
 }
 
+// Save attempt to local storage
+function saveAttempt(score, totalQuestions) {
+    let attempts = JSON.parse(localStorage.getItem('attempts')) || [];
+    const attempt = {
+        score: score,
+        totalQuestions: totalQuestions,
+        date: new Date().toLocaleString()
+    };
+    attempts.push(attempt);
+    localStorage.setItem('attempts', JSON.stringify(attempts));
+}
+
+// Load attempts from local storage and display them in the scoreboard
+function loadAttempts() {
+    const attempts = JSON.parse(localStorage.getItem('attempts')) || [];
+    const scoreboardList = document.getElementById('scoreboard-list');
+    scoreboardList.innerHTML = ''; // Clear previous entries
+
+    attempts.forEach(attempt => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${attempt.date}: ${attempt.score}/${attempt.totalQuestions}`;
+        scoreboardList.appendChild(listItem);
+    });
+}
+
 // Start the quiz by displaying the first question and initializing the timer
 function startQuiz() {
     const stateLoaded = loadQuizState();
@@ -236,6 +261,12 @@ function finishQuiz() {
     document.getElementById('finish-page').style.display = 'flex';
     document.getElementById('score').textContent = score;
     document.getElementById('total-questions').textContent = questions.length;
+
+    // Save the attempt
+    saveAttempt(score, questions.length);
+
+    // Update the scoreboard
+    loadAttempts();
 
     clearQuizState(); // Clear the state when the quiz finishes
 

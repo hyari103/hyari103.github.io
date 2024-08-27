@@ -218,3 +218,45 @@ select, input[type="text"] {
     height: auto;
     margin-bottom: 40px;
 }
+
+/* Flexbox container for result and scoreboard */
+#result-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 800px;
+}
+
+#result-content {
+    flex: 1;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+#scoreboard-container {
+    flex: 1;
+    padding-left: 20px;
+    background: #292b35;
+    border-radius: 8px;
+    text-align: left;
+    max-height: 400px; /* Adjust based on your needs */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#scoreboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 360px; /* Adjust based on your needs */
+    overflow-y: scroll;
+}
+
+#scoreboard-list li {
+    padding: 8px;
+    border-bottom: 1px solid #444;
+    font-size: 16px;
+    color: #f5f5f5;
+}
+

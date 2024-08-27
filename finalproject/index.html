@@ -27,13 +27,22 @@
     </div>
 </div>
 
+   <!-- Finish Page -->
+<div id="finish-page" class="page" style="display: none;">
+    <div id="result-container">
+        <div id="result-content">
+            <h1 id="result-title">Congratulations!</h1>
+            <p id="result-message">Your score is <span id="score"></span>/<span id="total-questions"></span></p>
+            <button id="restart-button">Restart Quiz</button>
+        </div>
 
-    <!-- Finish Page -->
-    <div id="finish-page" class="page" style="display: none;">
-        <h1 id="result-title">Congratulations!</h1>
-        <p id="result-message">Your score is <span id="score"></span>/<span id="total-questions"></span></p>
-        <button id="restart-button">Restart Quiz</button>
+        <!-- New Scoreboard Container -->
+        <div id="scoreboard-container">
+            <h2>Previous Attempts</h2>
+            <ul id="scoreboard-list"></ul>
+        </div>
     </div>
+</div>
 
     <script src="js/quiz.js"></script>
 </body>
