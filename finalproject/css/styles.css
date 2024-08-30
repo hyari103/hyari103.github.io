@@ -25,19 +25,19 @@ input[type="text"] {
 
 /* Adjust the image to be centered and within the container */
 #homepage img {
-    max-width: 60%;
+    max-width: 50%;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     box-sizing: border-box; /* Ensure padding and border are within the total width */
 }
 
 /* Ensure the button stays within the container */
 #start-button,
 #view-dashboard-button {
-    width: 80%;
-    max-width: 250px;
+    width: 70%;
+    max-width: 200px;
     box-sizing: border-box; /* Ensure padding and border are within the total width */
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 /* Result Page Images */
@@ -69,9 +69,9 @@ body {
 }
 
 .page {
-    width: 90%;
-    max-width: 800px;
-    height: 90vh;
+    width: 80%;
+    max-width: 600px;
+    height: auto;
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     background: rgba(44, 46, 59, 0.85); /* Adjust background color with opacity for transparency */
@@ -81,6 +81,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 
@@ -261,10 +262,10 @@ select, input[type="text"] {
 }
 
 #user-name {
-    width: 80%;
-    max-width: 250px; /* Match the button width */
-    padding: 8px;
-    margin: 10px 0;
+    width: 70%;
+    max-width: 200px; /* Match the button width */
+    padding: 6px;
+    margin: 8px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #3d405b;
