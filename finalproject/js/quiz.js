@@ -3,6 +3,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let timerInterval;
 let timeRemaining = 600; // 10 minutes
+let userName = ""; // New variable to store the user's name
 
 // Fetch questions from the API
 async function fetchQuestions() {
@@ -125,6 +126,7 @@ function clearQuizState() {
 function saveAttempt(score, totalQuestions) {
     let attempts = JSON.parse(localStorage.getItem('attempts')) || [];
     const attempt = {
+        userName: userName, // Include the user's name
         score: score,
         totalQuestions: totalQuestions,
         date: new Date().toLocaleString()
@@ -141,7 +143,7 @@ function loadAttempts() {
 
     attempts.forEach(attempt => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${attempt.date}: ${attempt.score}/${attempt.totalQuestions}`;
+        listItem.textContent = `${attempt.userName} - ${attempt.date}: ${attempt.score}/${attempt.totalQuestions}`;
         scoreboardList.appendChild(listItem);
     });
 }
@@ -344,13 +346,30 @@ document.getElementById('finish-button').addEventListener('click', () => {
 });
 
 // Event listener to handle the Start Quiz button click
-document.getElementById('start-button').addEventListener('click', startQuiz);
+document.getElementById('start-button').addEventListener('click', () => {
+    userName = document.getElementById('user-name').value.trim();
+    if (userName === "") {
+        alert("Please enter your name to start the quiz.");
+        return;
+    }
+    startQuiz();
+});
+
+// Event listener to handle the View Dashboard button click
+document.getElementById('view-dashboard-button').addEventListener('click', () => {
+    loadAttempts(); // Load previous attempts
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('finish-page').style.display = 'flex';
+});
 
 // Event listener to handle the Restart Quiz button click
 document.getElementById('restart-button').addEventListener('click', () => {
     clearQuizState(); // Clear the state when restarting
     document.getElementById('finish-page').style.display = 'none';
     document.getElementById('homepage').style.display = 'flex';
+
+    // Ensure "View Dashboard" button is visible
+    document.getElementById('view-dashboard-button').style.display = 'inline-block';
 
     // Clear the question container to avoid showing the last question briefly
     const questionContainer = document.getElementById('question-container');
